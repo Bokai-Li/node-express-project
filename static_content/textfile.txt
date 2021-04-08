@@ -1,0 +1,1 @@
+This is static file, can be access from //localhost:PORT/textfile.txt

@@ -1,8 +1,14 @@
 const Joi = require('joi')
+const logger = require('./logger')
 const express = require('express')
 const app=express()
 
 app.use(express.json())
+app.use(logger)
+//can parse url encoded key&value pair
+app.use(express.urlencoded({extended:true}))
+//localhost:3000/textfile.txt
+app.use(express.static('static_content'))
 
 const courses = [
     { id:1, name: 'course1'},
