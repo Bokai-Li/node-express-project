@@ -1,10 +1,22 @@
+const helmet = require('helmet') // commonly used for setting secure HTTP headers
+const morgan = require('morgan') // commonly used for logging HTTP requests
 const Joi = require('joi')
 const logger = require('./logger')
 const express = require('express')
 const app=express()
 
+console.log(`NODE_ENV:${process.env.NODE_ENV}`) //undefined
+console.log(`app:${app.get('env')}`) //development
+
 app.use(express.json())
-app.use(logger)
+app.use(helmet())
+//export NODE_ENV=production to disable logging and morgan
+if(app.get('env')==='development'){
+    app.use(logger)
+    app.use(morgan('tiny'))
+    console.log("morgan enabled.")
+}
+
 //can parse url encoded key&value pair
 app.use(express.urlencoded({extended:true}))
 //localhost:3000/textfile.txt
