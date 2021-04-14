@@ -1,3 +1,4 @@
+const config = require('config')
 const helmet = require('helmet') // commonly used for setting secure HTTP headers
 const morgan = require('morgan') // commonly used for logging HTTP requests
 const Joi = require('joi')
@@ -10,6 +11,14 @@ console.log(`app:${app.get('env')}`) //development
 
 app.use(express.json())
 app.use(helmet())
+//Configuration
+//export NODE_ENV=development
+//export NODE_ENV=production
+//export app_password=1234
+console.log('Application Name: '+config.get('name'))
+console.log('Mail Server: ' + config.get('mail.host'))
+console.log('Mail Server: ' + config.get('mail.password'))
+
 //export NODE_ENV=production to disable logging and morgan
 if(app.get('env')==='development'){
     app.use(logger)
