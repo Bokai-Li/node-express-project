@@ -10,4 +10,4 @@ function getUser(id, callback){
         console.log("Reading db...")
         callback({id:id, gitHubUsername:'bokai247'})
     }, 2000);
-}
+} 
